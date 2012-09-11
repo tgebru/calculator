@@ -39,6 +39,9 @@
 {
     [super awakeFromNib];
     self.splitViewController.delegate = self;
+    
+    //call drawRect when bounds change
+    self.view.contentMode = UIViewContentModeRedraw;
 }
 
 - (id <SplitViewBarButtonItemPresenter>) splitViewBarButtonItemPresenter

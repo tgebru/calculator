@@ -23,6 +23,13 @@
 @synthesize splitViewBarButtonItem = _splitViewBarButtonItem; //implementation of SplitViewBarButtonItemPresenter protocol
 //@synthesize toolbar = _toolbar; //to put splitViewBarButton in 
 
+- (void)awakeFromNib 
+{
+    [super awakeFromNib];
+ 
+    //call drawRect when bounds change
+    self.view.contentMode = UIViewContentModeRedraw;
+}
 
 - (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
 {

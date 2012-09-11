@@ -24,10 +24,17 @@
 
 
 #define DEFAULT_SCALE 10
+#define SCALE_KEY  @"scale"
+#define ORIGIN_KEY @"origin"
+
 
 - (CGFloat)scale
 {
     if(!_scale){
+        //get scale from NSUserDefaults
+        NSArray *scaleArrayStoredByUser = (NSArray *) [[NSUserDefaults standardUserDefaults] objectForKey:SCALE_KEY];
+        CGFloat scaleStoredByUser = [(NSNumber *)[scaleArrayStoredByUser objectAtIndex:0] floatValue]; 
+        if (scaleStoredByUser)return scaleStoredByUser;
         return DEFAULT_SCALE; //don't allow zero scale
     }else {
         return _scale;
@@ -42,6 +49,22 @@
     }
 }
 
+
+- (CGPoint)origin
+{
+    if (!_origin.x && !_origin.y){
+        //get origin from NSUserDefaults
+        NSArray *originCoordinatesStoredByUser = (NSArray *)[[NSUserDefaults standardUserDefaults] objectForKey:ORIGIN_KEY]; 
+        CGFloat origin_x = [(NSNumber *)[originCoordinatesStoredByUser objectAtIndex:0]floatValue];
+        CGFloat origin_y = [(NSNumber *)[originCoordinatesStoredByUser objectAtIndex:1]floatValue]; 
+        if (origin_x && origin_y){
+            CGPoint originStoredByUser = CGPointMake(origin_x, origin_y);
+            return originStoredByUser;
+        }
+    }
+    return _origin;
+}
+
 - (void) setOrigin:(CGPoint) origin
 {
     if (_origin.x != origin.x && _origin.y != origin.y){
@@ -49,13 +72,28 @@
         _origin.y = origin.y;
         [self setNeedsDisplay]; //any time our origin changes, call for redraw
     }
+    
+    
 }
 
-- (CGPoint)origin
+- (void) saveToNSDefaults:(id)value :(NSString *)key
 {
-    return _origin;
+    id valueConvertedToObject = value;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([value isKindOfClass:[NSValue class]]){
+        CGPoint origin = [(NSValue *)value CGPointValue];
+        NSNumber *origin_x = [NSNumber numberWithFloat:origin.x];
+        NSNumber *origin_y = [NSNumber numberWithFloat:origin.y];
+        NSArray *arrayWithOriginCoordinates = [NSArray arrayWithObjects:origin_x,origin_y, nil];
+        valueConvertedToObject = arrayWithOriginCoordinates;
+    }
+    
+    [defaults setObject:valueConvertedToObject forKey:key];
+    [defaults synchronize];
+    
+    //NSLog (@"done saving to defaults");
 }
-
 
 - (void)pinch:(UIPinchGestureRecognizer *)gesture
 {
@@ -64,9 +102,11 @@
         self.scale *=gesture.scale; //adjust our scale
         gesture.scale = 1; //reset gesture's scale to 1 (so future changes are incremental--not cumulative
         
+        
         //save change in NSUser Defaults
-        [[NSUserDefaults standardUserDefaults]setFloat:self.scale forKey:@"newScale"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        NSNumber * scaleConvertedToObject = [NSNumber numberWithFloat:self.scale];
+        [self saveToNSDefaults:scaleConvertedToObject :@"scale"];
+
     }
 }
 
@@ -85,10 +125,8 @@
         [gesture setTranslation:CGPointZero inView:self]; 
         
         //save change in NSUser Defaults
-       // NSString *string = [[self.origin class] NSStringFromCGPoint(self.origin)];
-        
-       // [[NSUserDefaults standardUserDefaults]setString:[[self.origin class] NSStringFromCGPoint(self.origin)]forKey:@"newScale"]];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        NSValue *originConvertedToObject = [NSValue valueWithCGPoint:self.origin];
+        [self saveToNSDefaults:originConvertedToObject:@"origin"];
     }
 }
 
@@ -99,14 +137,14 @@
         
         CGPoint translation = [gesture locationInView:self];
         CGPoint my_origin = self.origin;
-        
-        my_origin.x += translation.x/2; //will update GraphView via graph
-        my_origin.y += translation.y/2;
-        
+                
+        my_origin.x = translation.x; //will update GraphView via graph
+        my_origin.y = translation.y;
         self.origin = my_origin;
                 
         //save change in NSUser Defaults
-        //to do
+        NSValue *originConvertedToObject = [NSValue valueWithCGPoint:self.origin];
+        [self saveToNSDefaults:originConvertedToObject:@"origin"];
     }
 }
 
