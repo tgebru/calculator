@@ -82,7 +82,9 @@
         
         self.origin = my_origin;
 
-        [gesture setTranslation:CGPointZero inView:self];   
+        [gesture setTranslation:CGPointZero inView:self]; 
+        
+        //save change in NSUser Defaults
        // NSString *string = [[self.origin class] NSStringFromCGPoint(self.origin)];
         
        // [[NSUserDefaults standardUserDefaults]setString:[[self.origin class] NSStringFromCGPoint(self.origin)]forKey:@"newScale"]];
@@ -102,8 +104,9 @@
         my_origin.y += translation.y/2;
         
         self.origin = my_origin;
-        
-        //[gesture s:CGPointZero inView:self];
+                
+        //save change in NSUser Defaults
+        //to do
     }
 }
 
@@ -154,15 +157,15 @@
   
     CGPoint lastPoint;
     CGPoint line;
-    lastPoint.x = self.bounds.origin.x;
-    line.y = [self.dataSource yValueForGraphView:self :line.x-self.bounds.size.width/2]+self.bounds.size.height/2;
+    //lastPoint.x = self.bounds.origin.x;
+    //line.y = [self.dataSource yValueForGraphView:self :line.x-self.bounds.size.width/2]+self.bounds.size.height/2;
    
     //Iterate horizontally, get the Y value of each X and graph it
     for (int x=self.bounds.origin.x; x<self.contentScaleFactor* self.bounds.origin.x+self.bounds.size.width; x++){
         line.x = x;
-        
         //Get Y value from datasource and convert to display scale
         line.y = self.origin.y-(self.scale*[self.dataSource yValueForGraphView:self :(1/self.scale)*(line.x-self.origin.x)]);
+        //NSLog(@"x=%@, y=%@", [NSString stringWithFormat:@"%f", line.x], [NSString stringWithFormat:@"%f", line.y]);
         CGContextBeginPath(context);
         CGContextMoveToPoint(context, lastPoint.x, lastPoint.y);
         CGContextAddLineToPoint(context, line.x, line.y);

@@ -132,7 +132,7 @@
 
 - (double)yValueForGraphViewController:(GraphViewController*)sender: (double)forXValue
 {
-    [self.testVariableValues setObject:[NSNumber numberWithInt:forXValue] forKey: @"x"];
+    [self.testVariableValues setObject:[NSNumber numberWithDouble:forXValue] forKey: @"x"];
     return [[self.brain class] runProgram:self.brain.program usingVariableValues:self.testVariableValues];
 }
 
