@@ -14,7 +14,6 @@
 - (void)clearAllOperands;
 - (void)clearLastInput;
 - (NSString *)returnLastInput;
-//- (double)performOperation: (NSString *) operation;
 - (void)performOperation: (NSString *) operation;
 - (NSString *) updateProgramDescription;
 

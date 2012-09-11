@@ -108,6 +108,7 @@
     //self.graphViewController.controllerDataSource = self;
     [segue.destinationViewController setControllerDataSource:self];
     [segue.destinationViewController setYValue:0.0];
+    [segue.destinationViewController setTitle:[[self.brain class] descriptionOfProgram:self.brain.program]];
     
 }
 
