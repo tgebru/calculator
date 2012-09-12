@@ -17,11 +17,11 @@
 @property (nonatomic, strong) NSString *previousStackContent;
 @property (nonatomic, strong) CalculatorBrain *brain;
 @property (nonatomic, strong) NSMutableDictionary *testVariableValues;
-//@property (nonatomic, strong) IBOutlet GraphViewController *graphViewController;
 
 @end
 
 @implementation CalculatorViewController
+//@synthesize title;
 @synthesize display;
 @synthesize operandDisplay=_operandDisplay;
 @synthesize userIsInTheMiddleOfEnteringANumber;
@@ -30,27 +30,37 @@
 @synthesize dotHasBeenPressed = _dotHasBeenPressed;
 @synthesize brain = _brain;
 @synthesize testVariableValues = _testVariableValues;
-//@synthesize graphViewController= _graphViewController;
-
-
 
 //Stuff for iPad split view controller + rotating
 - (void)awakeFromNib 
 {
     [super awakeFromNib];
     self.splitViewController.delegate = self;
-    
+
     //call drawRect when bounds change
     self.view.contentMode = UIViewContentModeRedraw;
 }
 
-- (id <SplitViewBarButtonItemPresenter>) splitViewBarButtonItemPresenter
+
+- (id <SplitViewBarButtonItemPresenter>)splitViewBarButtonItemPresenter
 {
     id detailVC = [self.splitViewController.viewControllers lastObject];
-    if (![detailVC conformsToProtocol:@protocol(SplitViewBarButtonItemPresenter)]){
+    [detailVC setTitle:[[self.brain class] descriptionOfProgram:self.brain.program]];
+    if (![detailVC conformsToProtocol:@protocol(SplitViewBarButtonItemPresenter)]) {
         detailVC = nil;
     }
     return detailVC;
+}
+
+// Does the bar button item transfer from existing detail view controller to destination
+- (void)transferSplitViewBarButtonItemToViewController:(id)destinationViewController
+{
+    UIBarButtonItem *splitViewBarButtonItem = [[self splitViewBarButtonItemPresenter] splitViewBarButtonItem];
+    [[self splitViewBarButtonItemPresenter] setSplitViewBarButtonItem:nil];
+    
+    if (splitViewBarButtonItem) {
+        [destinationViewController setSplitViewBarButtonItem:splitViewBarButtonItem];
+    }
 }
 
 - (BOOL)splitViewController:(UISplitViewController *)svc 
@@ -65,7 +75,7 @@
           withBarButtonItem:(UIBarButtonItem *)barButtonItem 
        forPopoverController:(UIPopoverController *)pc
 {
-    barButtonItem.title = self.title;
+    barButtonItem.title = @"Calculator";//self.title;
     //tell the detail view to put this button up
     [self splitViewBarButtonItemPresenter].splitViewBarButtonItem = barButtonItem;
 }
@@ -76,6 +86,7 @@
 {
     [self splitViewBarButtonItemPresenter].splitViewBarButtonItem = nil;
 }
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -270,6 +281,7 @@
 
 - (void)viewDidUnload {
     [self setOperandDisplay:nil];
+    [self setTitle:nil];
     [super viewDidUnload];
 }
 @end

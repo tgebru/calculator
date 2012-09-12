@@ -42,8 +42,8 @@
          endingColumnNumber = "2147483647"
          startingLineNumber = "19"
          endingLineNumber = "19"
-         landmarkName = "yValue"
-         landmarkType = "19">
+         landmarkName = "@interface GraphViewController"
+         landmarkType = "2">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -79,11 +79,39 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Calculator/CalculatorViewController.m"
-         timestampString = "369083882.79935"
+         timestampString = "369166266.347855"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "85"
-         endingLineNumber = "85"
+         startingLineNumber = "95"
+         endingLineNumber = "95"
+         landmarkName = "-shouldAutorotateToInterfaceOrientation:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Calculator/GraphViewController.m"
+         timestampString = "369162354.175535"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "37"
+         endingLineNumber = "37"
+         landmarkName = "-handleSplitViewBarButtonItem:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Calculator/CalculatorViewController.m"
+         timestampString = "369166266.347855"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "96"
+         endingLineNumber = "96"
          landmarkName = "@implementation CalculatorViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -93,11 +121,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Calculator/GraphViewController.m"
-         timestampString = "369084938.282515"
+         timestampString = "369166853.812642"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "45"
-         endingLineNumber = "45"
+         startingLineNumber = "56"
+         endingLineNumber = "56"
          landmarkName = "-yValueForGraphView::"
          landmarkType = "5">
       </FileBreakpoint>
@@ -106,69 +134,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "Calculator/CalculatorViewController.m"
-         timestampString = "369083882.79935"
-         startingColumnNumber = "2147483647"
-         endingColumnNumber = "2147483647"
-         startingLineNumber = "86"
-         endingLineNumber = "86"
-         landmarkName = "@implementation CalculatorViewController"
-         landmarkType = "3">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
          filePath = "Calculator/GraphViewController.m"
-         timestampString = "369084938.282515"
-         startingColumnNumber = "2147483647"
-         endingColumnNumber = "2147483647"
-         startingLineNumber = "56"
-         endingLineNumber = "56"
-         landmarkName = "@implementation GraphViewController"
-         landmarkType = "3">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "Calculator/GraphViewController.m"
-         timestampString = "369084938.282515"
+         timestampString = "369166853.812642"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
          startingLineNumber = "57"
          endingLineNumber = "57"
-         landmarkName = "-setGraphView:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "Calculator/CalculatorViewController.m"
-         timestampString = "362017636.851589"
-         startingColumnNumber = "2147483647"
-         endingColumnNumber = "2147483647"
-         startingLineNumber = "33"
-         endingLineNumber = "33"
-         landmarkName = "@implementation CalculatorViewController"
-         landmarkType = "3">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "Calculator/CalculatorViewController.m"
-         timestampString = "369083882.79935"
-         startingColumnNumber = "2147483647"
-         endingColumnNumber = "2147483647"
-         startingLineNumber = "58"
-         endingLineNumber = "58"
-         landmarkName = "-splitViewController:shouldHideViewController:inOrientation:"
+         landmarkName = "-yValueForGraphView::"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -182,7 +154,7 @@
          endingColumnNumber = "2147483647"
          startingLineNumber = "20"
          endingLineNumber = "20"
-         landmarkName = "graphView"
+         landmarkName = "yValue"
          landmarkType = "19">
       </FileBreakpoint>
       <FileBreakpoint
@@ -196,7 +168,7 @@
          endingColumnNumber = "2147483647"
          startingLineNumber = "21"
          endingLineNumber = "21"
-         landmarkName = "controllerDataSource"
+         landmarkName = "xValue"
          landmarkType = "19">
          <Locations>
             <Location
@@ -249,37 +221,7 @@
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
          startingLineNumber = "22"
-         endingLineNumber = "22"
-         landmarkName = "@interface CalculatorViewController()"
-         landmarkType = "2">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "Calculator/GraphViewController.m"
-         timestampString = "369084938.282515"
-         startingColumnNumber = "2147483647"
-         endingColumnNumber = "2147483647"
-         startingLineNumber = "44"
-         endingLineNumber = "44"
-         landmarkName = "@implementation GraphViewController"
-         landmarkType = "3">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "Calculator/CalculatorViewController.m"
-         timestampString = "369083882.79935"
-         startingColumnNumber = "2147483647"
-         endingColumnNumber = "2147483647"
-         startingLineNumber = "60"
-         endingLineNumber = "60"
-         landmarkName = "-splitViewController:shouldHideViewController:inOrientation:"
-         landmarkType = "5">
+         endingLineNumber = "22">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -376,7 +318,7 @@
          endingColumnNumber = "2147483647"
          startingLineNumber = "14"
          endingLineNumber = "14"
-         landmarkName = "tripleTapRecognizer"
+         landmarkName = "graphView"
          landmarkType = "19">
       </FileBreakpoint>
       <FileBreakpoint
@@ -449,5 +391,28 @@
          landmarkName = "-tripleTap:"
          landmarkType = "5">
       </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Calculator/CalculatorViewController.m"
+         timestampString = "369166266.347855"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "78"
+         endingLineNumber = "78"
+         landmarkName = "-splitViewController:willHideViewController:withBarButtonItem:forPopoverController:"
+         landmarkType = "5">
+      </FileBreakpoint>
    </FileBreakpoints>
+   <ExceptionBreakpoints>
+      <ExceptionBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         scope = "0"
+         stopOnStyle = "0">
+      </ExceptionBreakpoint>
+   </ExceptionBreakpoints>
 </Bucket>

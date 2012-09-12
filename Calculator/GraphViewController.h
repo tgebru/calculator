@@ -16,6 +16,8 @@
 @end
 
 @interface GraphViewController : UIViewController <SplitViewBarButtonItemPresenter>
+
+
 @property (nonatomic) double yValue; 
 @property (nonatomic) double xValue;
 

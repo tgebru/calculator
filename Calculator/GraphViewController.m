@@ -8,9 +8,11 @@
 
 #import "GraphViewController.h"
 #import "GraphView.h"
+#import "SplitViewBarButtonItemPresenter.h"
 
 @interface GraphViewController () <GraphViewDataSource>
 @property (nonatomic, weak) IBOutlet GraphView *graphView;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, strong) UITapGestureRecognizer *tripleTapRecognizer;
 @end
 
@@ -18,29 +20,37 @@
 @synthesize yValue = _yValue;
 @synthesize xValue = _xValue;
 @synthesize graphView=_graphView;
+@synthesize toolbar = _toolbar;
 @synthesize controllerDataSource= _controllerDataSource;
 @synthesize tripleTapRecognizer = _tripleTapRecognizer;
 @synthesize splitViewBarButtonItem = _splitViewBarButtonItem; //implementation of SplitViewBarButtonItemPresenter protocol
-//@synthesize toolbar = _toolbar; //to put splitViewBarButton in 
 
-- (void)awakeFromNib 
-{
-    [super awakeFromNib];
- 
-    //call drawRect when bounds change
-    self.view.contentMode = UIViewContentModeRedraw;
-}
-
-- (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
+- (void)handleSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
 {
     if (_splitViewBarButtonItem != splitViewBarButtonItem){
-        //NSMutableArray *toolbarItems = [self.toolbar.items mutableclopy];
-        //if (_splitViewBarButtonItem)[toolbarItems removeObject:_splitViewBarButtonItem];
-        //if (splitViewBarButtonItem)[toolbarItems insertObject:splitViewBarButtonItem atIndex:0];
-       // self.toolbar.items = toolbarItems;
+        NSMutableArray *toolbarItems = [self.toolbar.items mutableCopy];
+        if (_splitViewBarButtonItem)[toolbarItems removeObject:_splitViewBarButtonItem];
+        if (splitViewBarButtonItem)[toolbarItems insertObject:splitViewBarButtonItem atIndex:0];
+         self.toolbar.items = toolbarItems;
         _splitViewBarButtonItem = splitViewBarButtonItem;
     }
 }
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self handleSplitViewBarButtonItem:self.splitViewBarButtonItem];
+    
+}
+
+
+- (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
+{
+    if (splitViewBarButtonItem != _splitViewBarButtonItem) {
+        [self handleSplitViewBarButtonItem:splitViewBarButtonItem];
+    }
+}
+
 
 -(double)yValueForGraphView:(GraphView *)sender:(double)atXValue
 {
@@ -74,22 +84,13 @@
     
 }
 
-/*
-- (void) handleGraphGesture:(UIPanGestureRecognizer *)gesture
-{
-    if ((gesture.state == UIGestureRecognizerStateChanged) || 
-        (gesture.state == UIGestureRecognizerStateEnded)) {
-        CGPoint translation = [gesture translationInView:self.graphView];
-        self.yValue -= translation.y/2; //will update GraphView via graph
-        self.xValue -= translation.x/2;
-        [gesture setTranslation:CGPointZero inView:self.graphView];
-    }
-}
- */
-
 -(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
     return YES; //support all orientations
 }
 
+- (void)viewDidUnload {
+    [self setToolbar:nil];
+    [super viewDidUnload];
+}
 @end
