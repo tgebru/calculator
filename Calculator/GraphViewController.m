@@ -13,36 +13,27 @@
 @interface GraphViewController () <GraphViewDataSource>
 @property (nonatomic, weak) IBOutlet GraphView *graphView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+
 @property (nonatomic, strong) UITapGestureRecognizer *tripleTapRecognizer;
 @end
 
 @implementation GraphViewController
 @synthesize yValue = _yValue;
 @synthesize xValue = _xValue;
-@synthesize graphView=_graphView;
 @synthesize toolbar = _toolbar;
+@synthesize graphView=_graphView;
 @synthesize controllerDataSource= _controllerDataSource;
 @synthesize tripleTapRecognizer = _tripleTapRecognizer;
 @synthesize splitViewBarButtonItem = _splitViewBarButtonItem; //implementation of SplitViewBarButtonItemPresenter protocol
 
 - (void)handleSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
 {
-    if (_splitViewBarButtonItem != splitViewBarButtonItem){
-        NSMutableArray *toolbarItems = [self.toolbar.items mutableCopy];
-        if (_splitViewBarButtonItem)[toolbarItems removeObject:_splitViewBarButtonItem];
-        if (splitViewBarButtonItem)[toolbarItems insertObject:splitViewBarButtonItem atIndex:0];
-         self.toolbar.items = toolbarItems;
-        _splitViewBarButtonItem = splitViewBarButtonItem;
-    }
+    NSMutableArray *toolbarItems = [self.toolbar.items mutableCopy];
+    if (_splitViewBarButtonItem) [toolbarItems removeObject:_splitViewBarButtonItem];
+    if (splitViewBarButtonItem) [toolbarItems insertObject:splitViewBarButtonItem atIndex:0];
+    self.toolbar.items = toolbarItems;
+    _splitViewBarButtonItem = splitViewBarButtonItem;
 }
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self handleSplitViewBarButtonItem:self.splitViewBarButtonItem];
-    
-}
-
 
 - (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
 {
@@ -51,6 +42,14 @@
     }
 }
 
+// viewDidLoad is callled after this view controller has been fully instantiated
+//  and its outlets have all been hooked up.
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self handleSplitViewBarButtonItem:self.splitViewBarButtonItem];
+}
 
 -(double)yValueForGraphView:(GraphView *)sender:(double)atXValue
 {
@@ -90,6 +89,7 @@
 }
 
 - (void)viewDidUnload {
+    [self setToolbar:nil];
     [self setToolbar:nil];
     [super viewDidUnload];
 }

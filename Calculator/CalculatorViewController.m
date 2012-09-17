@@ -45,48 +45,34 @@
 - (id <SplitViewBarButtonItemPresenter>)splitViewBarButtonItemPresenter
 {
     id detailVC = [self.splitViewController.viewControllers lastObject];
-    [detailVC setTitle:[[self.brain class] descriptionOfProgram:self.brain.program]];
     if (![detailVC conformsToProtocol:@protocol(SplitViewBarButtonItemPresenter)]) {
         detailVC = nil;
     }
     return detailVC;
 }
 
-// Does the bar button item transfer from existing detail view controller to destination
-- (void)transferSplitViewBarButtonItemToViewController:(id)destinationViewController
-{
-    UIBarButtonItem *splitViewBarButtonItem = [[self splitViewBarButtonItemPresenter] splitViewBarButtonItem];
-    [[self splitViewBarButtonItemPresenter] setSplitViewBarButtonItem:nil];
-    
-    if (splitViewBarButtonItem) {
-        [destinationViewController setSplitViewBarButtonItem:splitViewBarButtonItem];
-    }
-}
-
-- (BOOL)splitViewController:(UISplitViewController *)svc 
-   shouldHideViewController:(UIViewController *)vc 
+- (BOOL)splitViewController:(UISplitViewController *)svc
+   shouldHideViewController:(UIViewController *)vc
               inOrientation:(UIInterfaceOrientation)orientation
 {
-    return [self splitViewBarButtonItemPresenter] ? UIInterfaceOrientationIsPortrait(orientation):NO;
+    return [self splitViewBarButtonItemPresenter] ? UIInterfaceOrientationIsPortrait(orientation) : NO;
 }
 
-- (void)splitViewController:(UISplitViewController *)svc 
-     willHideViewController:(UIViewController *)aViewController 
-          withBarButtonItem:(UIBarButtonItem *)barButtonItem 
+- (void)splitViewController:(UISplitViewController *)svc
+     willHideViewController:(UIViewController *)aViewController
+          withBarButtonItem:(UIBarButtonItem *)barButtonItem
        forPopoverController:(UIPopoverController *)pc
 {
     barButtonItem.title = @"Calculator";//self.title;
-    //tell the detail view to put this button up
     [self splitViewBarButtonItemPresenter].splitViewBarButtonItem = barButtonItem;
 }
 
-- (void) splitViewController:(UISplitViewController *)svc 
-      willShowViewController:(UIViewController *)aViewController 
-   invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+- (void)splitViewController:(UISplitViewController *)svc
+     willShowViewController:(UIViewController *)aViewController
+  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
     [self splitViewBarButtonItemPresenter].splitViewBarButtonItem = nil;
 }
-
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
