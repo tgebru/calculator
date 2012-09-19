@@ -12,7 +12,6 @@
 
 @interface GraphViewController () <GraphViewDataSource>
 @property (nonatomic, weak) IBOutlet GraphView *graphView;
-@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @property (nonatomic, strong) UITapGestureRecognizer *tripleTapRecognizer;
 @end
@@ -25,7 +24,16 @@
 @synthesize controllerDataSource= _controllerDataSource;
 @synthesize tripleTapRecognizer = _tripleTapRecognizer;
 @synthesize splitViewBarButtonItem = _splitViewBarButtonItem; //implementation of SplitViewBarButtonItemPresenter protocol
+//@synthesize detailViewTitle = _detailViewTitle;
 
+/*
+- (void) setDetailViewTitle:(NSString *)detailViewTitle
+{
+    if (![_detailViewTitle isEqualToString:detailViewTitle]){
+        _detailViewTitle = detailViewTitle;
+    }
+}
+*/
 - (void)handleSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
 {
     NSMutableArray *toolbarItems = [self.toolbar.items mutableCopy];
@@ -41,7 +49,13 @@
         [self handleSplitViewBarButtonItem:splitViewBarButtonItem];
     }
 }
-
+/*
+- (void)setToolbarTitle 
+{
+    UIBarItem *title = [self.toolbar.items objectAtIndex:1];
+    title.title = self.detailViewTitle;
+}
+ */
 // viewDidLoad is callled after this view controller has been fully instantiated
 //  and its outlets have all been hooked up.
 
@@ -49,6 +63,7 @@
 {
     [super viewDidLoad];
     [self handleSplitViewBarButtonItem:self.splitViewBarButtonItem];
+    //[self setToolbarTitle];
 }
 
 -(double)yValueForGraphView:(GraphView *)sender:(double)atXValue

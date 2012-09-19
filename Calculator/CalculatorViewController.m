@@ -124,6 +124,8 @@
     if ([self splitViewGraphViewController]) {
         [self splitViewGraphViewController].controllerDataSource = self;
         [[self splitViewGraphViewController] setYValue:0.0];
+        [[[self splitViewGraphViewController ].toolbar.items objectAtIndex:1]
+               setTitle:[[self.brain class] descriptionOfProgram:self.brain.program]];
     } else {    
         //Segue   
         [self performSegueWithIdentifier:@"Graph" sender:self]; 

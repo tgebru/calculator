@@ -20,6 +20,9 @@
 
 @property (nonatomic) double yValue; 
 @property (nonatomic) double xValue;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+
+//@property (nonatomic, strong) NSString *detailViewTitle;
 
 
 @property (nonatomic, weak) IBOutlet id <GraphViewControllerDataSource> controllerDataSource;
